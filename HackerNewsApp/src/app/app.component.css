@@ -1,0 +1,21 @@
+ 
+.mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+td, th {
+    width: 25%;
+}
+
+.div-centre{
+    width: 80% !important;
+    margin: 0 auto !important;
+    text-align: center;
+}
+
+.mat-mdc-form-field,.mat-elevation-z8
+{
+    width: 80% !important;
+    margin-left: 10%;
+}
