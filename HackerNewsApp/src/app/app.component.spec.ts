@@ -1,9 +1,10 @@
 import {ComponentFixture,TestBed,fakeAsync} from '@angular/core/testing';
-import {AppComponent,Story} from './app.component';
+import {AppComponent} from './app.component';
 import {provideHttpClient} from '@angular/common/http';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {provideHttpClientTesting} from "@angular/common/http/testing";
 import {HNewsService} from './hnews.service';
+import {MatTableDataSource} from '@angular/material/table';
 
 describe('AppComponent', () => {
 
@@ -29,10 +30,21 @@ describe('AppComponent', () => {
     fixture.detectChanges();
   });
 
-  it('component should be created', fakeAsync(() => {
+  it('should create the component', fakeAsync(() => {
     expect(component).toBeTruthy();
   }));
 
+  it('should populate the dataSource', fakeAsync(() => {
+    component.dataSource=new MatTableDataSource([{title:'google',url:'https://www.google.com'}]);
+    fixture.detectChanges();
+    component.ngOnInit();
+    expect(component.dataSource.data).toEqual([{title:'google',url:'https://www.google.com'}]);
+  }));
+
+  it('should filter the dataSource', fakeAsync(() => {
+    component.dataSource.filter = 'title';
+    fixture.detectChanges();
+    component.ngOnInit();
+    expect(component.dataSource.filter).toBe('title');
+  }));
 });
-
-
