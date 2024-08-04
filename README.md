@@ -1,4 +1,4 @@
-#HackerNewsApp (Angular Project)
+# HackerNewsApp (Angular Project)
 
 1.Clone the project to any directory in your device/system.
 
