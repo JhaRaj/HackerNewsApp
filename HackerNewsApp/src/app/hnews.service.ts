@@ -9,7 +9,7 @@ import { AppSettings } from './app-settings';
 export class HNewsService {
   constructor(private http:HttpClient) {};
 
-  getData() :any{
+  getData(){
     return this.http.get(AppSettings.API_ENDPOINT);
   };
   
