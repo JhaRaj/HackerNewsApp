@@ -7,7 +7,7 @@ describe("HNewsService", () => {
     let httpTestingController: HttpTestingController;
     let httpservice: HNewsService;
     let baseUrl = "https://localhost:7214/api/HackerNews/GetStories";
-    let data: {title: string; url: string;};
+    let data: {title: string; url: string;} | null;
    
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -27,11 +27,11 @@ describe("HNewsService", () => {
       }
     ));
 
-    it('create httpservice', () => {
+    it('should create http service', () => {
       expect(httpservice).toBeTruthy();
     });
     
-    it('mock api stories data', () => {
+    it('should mock api data', () => {
       httpservice.getData().subscribe((res:any) => {
         expect(res).toEqual(data);
       });
@@ -41,5 +41,24 @@ describe("HNewsService", () => {
 	    });
 	    req.flush(data);
 	  });
+
+    it('should handle http error', () => {
+      httpservice.getData().subscribe({
+        error: (error) => {
+          expect(error.status).toBe(403);
+        },
+      });
+      
+      const req = httpTestingController.expectOne({
+	      method: 'GET',
+	      url: baseUrl,
+	    });
+  
+      req.flush('error occured', {
+        status: 403,
+        statusText: 'Forbidden',
+      });
+
+    });
 
   });
